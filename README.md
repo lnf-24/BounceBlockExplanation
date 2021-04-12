@@ -18,7 +18,7 @@ Did some code reading when I worked on 8B and 8C TAS, and want to document this 
 <img src="https://github.com/lnf-24/BounceBlockExplanation/blob/main/Images/5.png" height="230" ><br>
 ## State 3: Bouncing<br>
 <img src="https://github.com/lnf-24/BounceBlockExplanation/blob/main/Images/6.png" height="310" ><br>
-* Keep the `BounceDirection` of the last frame in WindingUp state and won’t recalculate anymore. (So player position on last WindingUp frame determines final liftboost)<br>
+* Keep the `BounceDirection` of the last frame in WindingUp state and won’t recalculate anymore.<br>
 * From `StartPosition` of the block, move 24 px in `BounceDirection` to get `TargetPosition`. The block will move from `ExactPosition` to `TargetPosition` by `min(3 * MoveSpeed, 200)`. `MoveSpeed` increases by 13.33 per frame until it reaches 140.<br>
 * The liftboost of the block is `min(3 * MoveSpeed, 200)`, x component multiplied by 0.75.<br>
 * If player leaves the block, or `ExactPosition` is same as `TargetPosition`, enter BounceEnd state. If player is still on the block, the block cancles dash, sets player’s speed to liftboost, and gives coyote time. (In this coyote time you can core hyper/super or jump to get second boost)<br>
@@ -38,7 +38,7 @@ Center: {BounceBlock.Center}
 startPos: {BounceBlock.startPos}
 ```
 * Generally you don't want to walk or climb too much in WindingUp state, or the state could become frames longer. In Bouncing state, walking or climbing no longer affect the block.<br>
-* For horizontal boosts, the last frame of WindingUp state determines final liftboost, so the position on that frame is what you want to manip. If you are on the top, you can crouch to make the direction more horizontal.<br>
-* If the block didn't move 1 px vertically in a frame, the vertical boost on that frame would be zero. This could be annoying when you are grabbing the side of a bounce block.<br>
+* For horizontal boosts, the last frame of WindingUp state determines the bouncing back direction, and final liftboost. So the position on that frame is what you want to manip. If you are on the top, you can crouch to make the direction more horizontal.<br>
+* If the block didn't push you 1 px vertically in a frame, the vertical boost on that frame would be zero. This could be annoying when you are grabbing the side of a bounce block.<br>
 * When the block throws player off, it *sets* your speed to liftboost, not adding liftboost to the speed. So we can't to use it to cancle dash to preserve dash speed.<br>
 * When doing core demohyper/super, you can extend your dash in coyote time, because coyote jump cancles horizontal dashes into hyper/super.<br>
