@@ -11,7 +11,7 @@ Did some code reading when I worked on 8B and 8C TAS, and want to document this 
 * The block will move from `ExactPosition` (with subpixel) to `TargetPosition` by `MoveSpeed`. `MoveSpeed` decreases by 10 per frame until it reaches 40.<br>
 <img src="https://github.com/lnf-24/BounceBlockExplanation/blob/main/Images/3.png" height="179" ><br>
 `BounceDirection` and `TargetPosition` is recalculated every frame, unless player has left the block. So if player moves on the block, the movement of the block also changes.<br>
-* The liftboost of the block is `MoveSpeed` (in opposite direction), x component multiplied by 0.75. (Therefore it’s not the same direction from block’s center to player’s center.)<br>
+* The liftboost of the block is `MoveSpeed` in opposite direction, x component multiplied by 0.75. (not the direction from block’s center to player’s center)<br>
 <img src="https://github.com/lnf-24/BounceBlockExplanation/blob/main/Images/4.png" height="131" ><br>
 * If the distance between `ExactPosition` and `TargetPosition` <= 1.414, set `MoveSpeed` to 0 and enter Bouncing state. (If you move too much on the block, this state would be longer)<br>
 * All in one picture<br>
