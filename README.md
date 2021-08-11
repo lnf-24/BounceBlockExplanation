@@ -17,13 +17,13 @@ Did some code reading while working on 8B and 8C TAS, and want to document this 
 * All in one picture<br>
 <img src="https://github.com/lnf-24/BounceBlockExplanation/blob/main/Images/5.png" height="279" ><br>
 ## State 3: Bouncing<br>
-<img src="https://github.com/lnf-24/BounceBlockExplanation/blob/main/Images/6.png" height="310" ><br>
 * This state uses the `BounceDirection` of the last frame in WindingUp state, doesn't recalculate anymore.<br>
 * From `StartPosition` of the block, move 24 px in `BounceDirection` to get `TargetPosition`.<br>
 * The block moves from `ExactPosition` to `TargetPosition` by `min(3 * MoveSpeed, 200)`. `MoveSpeed` increases by 13.33 per frame until it reaches 140.<br>
 * The liftboost of the block is `min(3 * MoveSpeed, 200)` x component multiplied by 0.75.<br>
 * If player leaves the block, or `ExactPosition` is same as `TargetPosition`, enter BounceEnd state.
 * If player is still on the block, the block cancles dash, sets player’s speed to liftboost, and gives coyote time.<br>
+<img src="https://github.com/lnf-24/BounceBlockExplanation/blob/main/Images/6.png" height="310" ><br>
 ## State 4: BounceEnd<br>
 * The block stays in place for 2 frames then breaks.<br>
 ## State 5: Broken<br>
