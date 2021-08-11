@@ -22,17 +22,18 @@ Did some code reading while working on 8B and 8C TAS, and want to document this 
 * From `StartPosition` of the block, move 24 px in `BounceDirection` to get `TargetPosition`.<br>
 * The block moves from `ExactPosition` to `TargetPosition` by `min(3 * MoveSpeed, 200)`. `MoveSpeed` increases by 13.33 per frame until it reaches 140.<br>
 * The liftboost of the block is `min(3 * MoveSpeed, 200)` x component multiplied by 0.75.<br>
-* If player leaves the block, or `ExactPosition` is same as `TargetPosition`, enter BounceEnd state. If player is still on the block, the block cancles dash, sets player’s speed to liftboost, and gives coyote time.<br>
+* If player leaves the block, or `ExactPosition` is same as `TargetPosition`, enter BounceEnd state.
+* If player is still on the block, the block cancles dash, sets player’s speed to liftboost, and gives coyote time.<br>
 ## State 4: BounceEnd<br>
 * The block stays in place for 2 frames then breaks.<br>
 ## State 5: Broken<br>
 * Respawn after 96 frames and back to Waiting state.<br>
 ## Some Notes<br>
-* In windingup state, since 'BounceDirection' and 'TargetPosition' is recalculated every frame, if player moves on the block, the movement of the block will also change. Generally you don't want to move too much in windingup state, or this state could become frames longer.<br>
-* If player crouches on the block, her center position would be lower, so 'BounceDirection' changes, which affects the block's movement.<br>
-* For horizontal boosts, the last frame of WindingUp state decides the final liftboost, so you want to get a proper player's position on that frame. If you are on the top, you can crouch to make the direction more close to horizontal.<br>
+* In windingup state, since `BounceDirection` and `TargetPosition` is recalculated every frame, if player moves on the block, the movement of the block will also change. Generally you don't want to move too much in windingup state, or this state could become frames longer.<br>
+* If player crouches on the block, her center position would be lower, so `BounceDirection` changes, which affects the block's movement.<br>
+* For horizontal boosts, the last frame of WindingUp state decides the final liftboost, so you want to manip player's position on that frame. If you are on the top, you can crouch to make the liftboost direction a bit more close to horizontal.<br>
 * In Bouncing state, walking or climbing no longer affects the block so you can move as you want.<br>
 * Liftbooost isn't in the direction from block’s center to player’s center.<br>
 * If the block didn't moves 1 integer px vertically in a frame, the vertical boost on that frame would be zero. This has something to do with the way the game calculates liftboost, and could be annoying when you are grabbing the side of a bounce block.<br>
 * In the coyote time after bouncing state you can do a core hyper/super, or just jump to get 40 + 2 liftboost.<br>
-* In latest CelesteTAS version you can use Ctrl + Click on the BounceBlock to show its informations, such as state, bounceDir, moveSpeed, etc.<br>
+* In latest CelesteTAS version you can use Ctrl + Click on the BounceBlock or customize info hud to show its informations, such as `state`, `bounceDir`, `moveSpeed`, etc.<br>
