@@ -19,10 +19,10 @@ Did some code reading while working on 8B and 8C TAS, and want to document this 
 ## State 3: Bouncing<br>
 * This state uses the `BounceDirection` of the last frame in WindingUp state, doesn't recalculate anymore.<br>
 * From `StartPosition` of the block, move 24 px in `BounceDirection` to get `TargetPosition`.<br>
-* The block moves from `ExactPosition` to `TargetPosition` by `min(3 * MoveSpeed, 200)`. `MoveSpeed` increases by 13.33 per frame until it reaches 140.<br>
+* The block moves from `ExactPosition` to `TargetPosition` by `MoveSpeed`. `MoveSpeed` increases by 13.33 per frame until it reaches 140. (Picture is wrong about block's speed, might edit it some time)<br>
 * The liftboost of the block is `min(3 * MoveSpeed, 200)` x component multiplied by 0.75.<br>
 * If player leaves the block, or `ExactPosition` is same as `TargetPosition`, enter BounceEnd state.
-* If player is still on the block, the block cancles dash, sets player’s speed to liftboost, and gives coyote time.<br>
+* If player is still on the block, the block cancels dash, sets player’s speed to liftboost, and gives coyote time.<br>
 <img src="https://github.com/lnf-24/BounceBlockExplanation/blob/main/Images/6.png" height="310" ><br>
 ## State 4: BounceEnd<br>
 * The block stays in place for 2 frames then breaks.<br>
@@ -34,6 +34,6 @@ Did some code reading while working on 8B and 8C TAS, and want to document this 
 * For horizontal boosts, the last frame of WindingUp state decides the final liftboost, so you want to manip player's position on that frame. If you are on the top, you can crouch to make the liftboost direction a bit more close to horizontal.<br>
 * In Bouncing state, walking or climbing no longer affects the block so you can move as you want.<br>
 * Liftbooost isn't in the direction from block’s center to player’s center.<br>
-* If the block didn't moves 1 integer px vertically in a frame, the vertical boost on that frame would be zero. This has something to do with the way the game calculates liftboost, and could be annoying when you are grabbing the side of a bounce block.<br>
+* If the block doesn't moves 1 integer px vertically in a frame, the vertical boost on that frame would be zero. This has something to do with the way the game calculates liftboost, and could be annoying when you are grabbing the side of a bounce block.<br>
 * In the coyote time after bouncing state you can do a core hyper/super, or just jump to get 40 + 2 liftboost.<br>
 * In latest CelesteTAS version you can use Ctrl + Click on the BounceBlock or customize info hud to show its informations, such as `state`, `bounceDir`, `moveSpeed`, etc.<br>
